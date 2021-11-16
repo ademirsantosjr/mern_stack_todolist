@@ -62,11 +62,19 @@ function App() {
       <h1>To-Do List App</h1>
 
       <div>
-        <input type="text"
-               placeholder="Descrição da Tarefa"
-               onChange={ e => setNewTodo(e.target.value) }
-               value={ newTodo }/>
-        <input type="date" onChange={ e => setNewDate(e.target.value) } value={ newDate }/>
+        <input
+          type="text"
+          placeholder="Descrição da Tarefa"
+          onChange={ e => setNewTodo(e.target.value) }
+          value={ newTodo }
+        />
+        
+        <input
+          type="date"
+          onChange={ e => setNewDate(e.target.value) }
+          value={ newDate }
+        />
+        
         <div onClick={ createTodo }>Adicionar</div>
       </div>
 
