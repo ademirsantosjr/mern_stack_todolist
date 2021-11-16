@@ -10,6 +10,7 @@
     text-decoration: line-through;
 }
 
-.todo .to-complete {
+.todo .to-complete,
+.todo .delete-todo {
     cursor: pointer;
 }
