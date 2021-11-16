@@ -22,6 +22,16 @@ router.patch('/update/:id', async (req, res) => {
     res.json(updatedToDo);
 });
 
+router.patch('/update/done/:id', async (req, res) => {
+    const todo = await ToDo.findById(req.params.id);
+    
+    todo.done = !todo.done;
+    
+    todo.save();
+
+    res.json(todo);
+});
+
 router.delete('/delete/:id', async (req, res) => {
     const deletedToDo = await ToDo.findByIdAndDelete({_id: req.params.id});
 
