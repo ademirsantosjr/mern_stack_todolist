@@ -2,6 +2,7 @@
 function Todo(props) {
   const todo = props.todo;
   const completeTodo = props.completeTodo;
+  const setTodoToEdit = props.setTodoToEdit;
   const deleteTodo = props.deleteTodo;
 
   return (
@@ -14,7 +15,13 @@ function Todo(props) {
         { (todo.done ? 'reativar' : 'Completar') }
       </div>
       
-      <div>Editar</div>
+      <div onClick={ () => setTodoToEdit({
+        id: todo._id,
+        description: todo.description,
+        duedate: todo.duedate
+      }) }>
+        Editar
+      </div>
       
       <div>Arquivar</div>
       
