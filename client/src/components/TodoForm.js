@@ -66,7 +66,7 @@ function TodoForm(props) {
       
       {
         props.todoToEdit.id
-        ? <button onClick={ handleSubmit }>Atualizar</button>
+        ? <button onClick={ handleSubmit }>Salvar</button>
         : null
       }
 

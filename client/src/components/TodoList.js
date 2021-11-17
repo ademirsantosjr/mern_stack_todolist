@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Todo from "./Todo";
 import TodoForm from "./TodoForm";
+import TodoSearchBar from "./TodoSearchBar";
 
 const API_BASE = "http://localhost:5000/api/v1";
 
@@ -22,6 +23,13 @@ function TodoList() {
       .then(res => res.json())
       .then(data => setTodos(data))
       .catch(err => console.error("Error: ", err));
+  }
+
+  const searchForTodos = description => {
+    fetch(API_BASE + "/todos/" + description)
+      .then(res => res.json())
+      .then(data => setTodos(data))
+      .catch(err => console.error("Error searching Todos: ", err) );
   }
 
   const createTodo = async (description, duedate) => {
@@ -68,8 +76,22 @@ function TodoList() {
     }));
   }
 
+  const archiveTodo = async id => {
+    const data = await fetch(API_BASE + "/todos/update/archive/" + id, {
+      method: 'PATCH'
+    }).then(res => res.json());
+
+    setTodos(todos => todos.map(todo => {
+      if (todo._id === data._id) {
+        todo.hide = data.hide;
+      }
+
+      return todo;
+    }));
+  }
+
   const deleteTodo = async id => {
-    const canDelete = window.confirm("Deseja Excluir Esta Tarefa?");
+    const canDelete = window.confirm("Deseja Excluir a Tarefa?");
 
     if (canDelete) {
       const data = await fetch(API_BASE + "/todos/delete/" + id, {
@@ -93,13 +115,16 @@ function TodoList() {
   return (
     <div>
       <TodoForm todoToEdit={ todoToEdit } onSubmit={ createTodo }/>
-      <input type="text" placeholder="Procurar..." />
+      
+      <TodoSearchBar onSearch={ searchForTodos } onCancel={ getTodos }/>
+      
       {todos.map((todo, index) => (
         <Todo 
           todo={ todo }
           completeTodo={ completeTodo }
           deleteTodo={ deleteTodo }
-          setTodoToEdit = { setTodoToEdit }
+          setTodoToEdit={ setTodoToEdit }
+          archiveTodo={ archiveTodo }
           key={ index }
         />
       ))}
