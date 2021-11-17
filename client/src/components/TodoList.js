@@ -3,11 +3,10 @@ import Todo from "./Todo";
 import TodoForm from "./TodoForm";
 import TodoSearchBar from "./TodoSearchBar";
 
-const API_BASE = "http://localhost:5000/api/v1";
+const API_BASE = "http://localhost:5000/api/v1/todos";
 
 function TodoList() {
-  const [todos, setTodos] = useState([]);
-  
+  const [todos, setTodos] = useState([]);  
   const [todoToEdit, setTodoToEdit] = useState({
     id: null,
     description: "",
@@ -19,28 +18,28 @@ function TodoList() {
   }, []);
 
   const getTodos = () => {
-    fetch(API_BASE + "/todos")
+    fetch(API_BASE)
       .then(res => res.json())
       .then(data => setTodos(data))
-      .catch(err => console.error("Error: ", err));
+      .catch(err => console.error("Error retrieving active Todos: ", err));
   }
 
   const getAllArchived = () => {
-    fetch(API_BASE + "/todos/archived")
+    fetch(API_BASE + "/archived")
       .then(res => res.json())
       .then(data => setTodos(data))
       .catch(err => console.error("Error retrieving Archived Todos: ", err) );
   }
 
   const searchForTodos = description => {
-    fetch(API_BASE + "/todos/" + description)
+    fetch(API_BASE + "/" + description)
       .then(res => res.json())
       .then(data => setTodos(data))
       .catch(err => console.error("Error searching Todos: ", err) );
   }
 
   const createTodo = async (description, duedate) => {
-    const data = await fetch(API_BASE + "/todos/new", {
+    const data = await fetch(API_BASE + "/new", {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
@@ -55,7 +54,7 @@ function TodoList() {
   }
 
   const updateTodo = async (id, description, duedate) => {
-    await fetch(API_BASE + "/todos/update/" + id, {
+    await fetch(API_BASE + "/update/" + id, {
       method: 'PATCH',
       headers: {
         "Content-Type": "application/json"
@@ -70,7 +69,7 @@ function TodoList() {
   }
 
   const completeTodo = async id => {
-    const data = await fetch(API_BASE + "/todos/update/done/" + id, {
+    const data = await fetch(API_BASE + "/update/done/" + id, {
       method: 'PATCH'
     }).then(res => res.json());
 
@@ -84,7 +83,7 @@ function TodoList() {
   }
 
   const archiveTodo = async id => {
-    const data = await fetch(API_BASE + "/todos/update/archive/" + id, {
+    const data = await fetch(API_BASE + "/update/archive/" + id, {
       method: 'PATCH'
     }).then(res => res.json());
 
@@ -103,13 +102,19 @@ function TodoList() {
     const canDelete = window.confirm("Deseja Excluir a Tarefa?");
 
     if (canDelete) {
-      const data = await fetch(API_BASE + "/todos/delete/" + id, {
+      const data = await fetch(API_BASE + "/delete/" + id, {
         method: 'DELETE'
       }).then(res => res.json());      
 
       setTodos(todos => todos.filter(todo => todo._id !== data._id));
     }
   }
+
+  const sortedTodosByDate = todos.sort((a, b) =>{
+    return (
+      new Date (a.duedate) - new Date (b.duedate)
+    );
+  });
 
   if (todoToEdit.id) {
     return (
@@ -122,7 +127,7 @@ function TodoList() {
   }
 
   return (
-    <div>
+    <div className="todo-list">
       <TodoForm todoToEdit={ todoToEdit } onSubmit={ createTodo }/>
       
       <TodoSearchBar
@@ -131,7 +136,14 @@ function TodoList() {
         onShowArchived={ getAllArchived }
       />
 
-      {todos.map((todo, index) => (
+      <table className="todo-table">
+      <tbody>
+      <tr>
+        <th>Descrição</th>
+        <th>Vencimento</th>
+        <th>Opções</th>
+      </tr>      
+      {sortedTodosByDate.map((todo, index) => (      
         <Todo 
           todo={ todo }
           completeTodo={ completeTodo }
@@ -141,6 +153,8 @@ function TodoList() {
           key={ index }
         />
       ))}
+      </tbody>
+      </table>
     </div>
   );
 }

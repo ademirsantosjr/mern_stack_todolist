@@ -7,15 +7,15 @@ function Todo(props) {
   const deleteTodo = props.deleteTodo;
 
   return (
-    <div className="todo">
+    <tr className="todo">
 
-      <div className="description">{ todo.description }</div>
+      <td >{ todo.description }</td>
 
-      <div className="due-date">{ todo.duedate.substring(0, 10) }</div>
+      <td >{ todo.duedate.substring(0, 10) }</td>
       
-      <div className="options">
+      <td className="todo-options">
         <button
-          className="btn btn-complete"
+          className="btn btn-options btn-complete-todo"
           disabled={ todo.hide }
           onClick={ () => completeTodo(todo._id) }
         >
@@ -23,7 +23,7 @@ function Todo(props) {
         </button>
         
         <button
-          className="btn btn-edit"
+          className="btn btn-options btn-edit-todo"
           disabled={ todo.hide || todo.done}
           onClick={ () => setTodoToEdit({
             id: todo._id,
@@ -35,7 +35,7 @@ function Todo(props) {
         </button>
         
         <button 
-          className="btn btn-archive"
+          className="btn btn-options btn-archive-todo"
           disabled={ !todo.done || todo.hide }
           onClick={ () => archiveTodo(todo._id) }
         >
@@ -43,13 +43,13 @@ function Todo(props) {
         </button>
         
         <button
-          className="btn btn-delete"
+          className="btn btn-options btn-delete-todo"
           onClick={ () => deleteTodo(todo._id) }
         >
           Excluir
         </button>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }
 

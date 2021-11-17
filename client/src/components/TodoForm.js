@@ -20,6 +20,16 @@ function TodoForm(props) {
   const handleSubmit = e => {
     e.preventDefault();
 
+    if (!inputDescription.trim()) {
+      alert("Descreva a Tarefa!!");
+      return;
+    }
+
+    if (!inputDueDate.trim()) {
+      alert("Informe uma Data!!");
+      return;
+    }
+
     if (props.todoToEdit.id) {
       props.onSubmit(props.todoToEdit.id, inputDescription, inputDueDate);
       cancelEdit();
@@ -41,7 +51,7 @@ function TodoForm(props) {
 
   return (
     <>
-      <form onSubmit={ handleSubmit }>
+      <form className="todo-form" onSubmit={ handleSubmit }>
         <input 
           type="text" 
           placeholder="Descreva a Tarefa"
@@ -59,20 +69,24 @@ function TodoForm(props) {
 
         {
           !props.todoToEdit.id          
-          ? <button>Adicionar</button>
+          ? <button className="btn" >Adicionar</button>
           : null
         }
       </form>
       
       {
         props.todoToEdit.id
-        ? <button onClick={ handleSubmit }>Salvar</button>
+        ? <button
+            className="btn btn-editing-todo"
+            onClick={ handleSubmit }>Salvar</button>
         : null
       }
 
       { 
         props.todoToEdit.id
-        ? <button onClick={ cancelEdit }>Cancelar</button>
+        ? <button
+            className="btn btn-canceling-todo"
+            onClick={ cancelEdit }>Cancelar</button>
         : null
       }
     </>

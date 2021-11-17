@@ -42,11 +42,17 @@ function TodoSearchBar(props) {
         onChange={ handleInputSearchChange }
       />
       
-      <button onClick={ handleSearch } >Pesquisar</button>
+      <button
+        className="btn btn-search-bar"
+        onClick={ handleSearch }>Pesquisar</button>
       
-      <button onClick={ handleCancel } >Cancelar</button>
+      <button
+        className="btn btn-search-bar"
+        onClick={ handleCancel }>Cancelar</button>
 
-      <button onClick={ handleShowArchived } >
+      <button
+        className="btn btn-search-bar"
+        onClick={ handleShowArchived }>
         { onlyArchived ? "Mostrar Ativos" : "Mostrar Arquivados" }
       </button>
     </div>      
