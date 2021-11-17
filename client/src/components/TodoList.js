@@ -93,6 +93,7 @@ function TodoList() {
   return (
     <div>
       <TodoForm todoToEdit={ todoToEdit } onSubmit={ createTodo }/>
+      <input type="text" placeholder="Procurar..." />
       {todos.map((todo, index) => (
         <Todo 
           todo={ todo }

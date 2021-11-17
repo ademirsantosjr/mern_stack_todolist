@@ -1,16 +1,23 @@
-.bordered {
-    padding: 8px;
-}
-
 .todo {
+    border-style: solid;
+    border-color: grey;
+    margin: 8px;
+    padding: 8px;
     display: flex;
+    justify-content: space-between;
 }
 
-.todo.is-done .description {
-    text-decoration: line-through;
+.due-date {
+    right: 0;
+    min-width: fit-content;
 }
 
-.todo .to-complete,
-.todo .delete-todo {
+.options {
+    display: flex;
+    gap: 8px;
+    right: 0;
+}
+
+.btn {
     cursor: pointer;
 }

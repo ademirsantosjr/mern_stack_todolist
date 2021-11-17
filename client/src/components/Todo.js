@@ -6,27 +6,33 @@ function Todo(props) {
   const deleteTodo = props.deleteTodo;
 
   return (
-    <>
-      <div>{ todo.description }</div>
+    <div className="todo">
+
+      <div className="description">{ todo.description }</div>
+
+      <div className="due-date">{ todo.duedate.substring(0, 10) }</div>
       
-      <div>{ todo.duedate }</div>
-      
-      <div onClick={ () => completeTodo(todo._id) }>
-        { (todo.done ? 'reativar' : 'Completar') }
+      <div className="options">
+        <button className="btn btn-complete" onClick={ () => completeTodo(todo._id) }>
+          { (todo.done ? 'reativar' : 'Completar') }
+        </button>
+        
+        <button
+          className="btn btn-edit"
+          onClick={ () => setTodoToEdit({
+            id: todo._id,
+            description: todo.description,
+            duedate: todo.duedate
+        }) }
+        >
+          Editar
+        </button>
+        
+        <button className="btn btn-archive" disabled={ !todo.done }>Arquivar</button>
+        
+        <button className="btn btn-delete" onClick={ () => deleteTodo(todo._id) }>Excluir</button>
       </div>
-      
-      <div onClick={ () => setTodoToEdit({
-        id: todo._id,
-        description: todo.description,
-        duedate: todo.duedate
-      }) }>
-        Editar
-      </div>
-      
-      <div>Arquivar</div>
-      
-      <div onClick={ () => deleteTodo(todo._id) }>Excluir</div>
-    </>
+    </div>
   );
 }
 
