@@ -25,6 +25,13 @@ function TodoList() {
       .catch(err => console.error("Error: ", err));
   }
 
+  const getAllArchived = () => {
+    fetch(API_BASE + "/todos/archived")
+      .then(res => res.json())
+      .then(data => setTodos(data))
+      .catch(err => console.error("Error retrieving Archived Todos: ", err) );
+  }
+
   const searchForTodos = description => {
     fetch(API_BASE + "/todos/" + description)
       .then(res => res.json())
@@ -88,6 +95,8 @@ function TodoList() {
 
       return todo;
     }));
+
+    setTodos(todos => todos.filter(todo => !todo.hide));
   }
 
   const deleteTodo = async id => {
@@ -116,8 +125,12 @@ function TodoList() {
     <div>
       <TodoForm todoToEdit={ todoToEdit } onSubmit={ createTodo }/>
       
-      <TodoSearchBar onSearch={ searchForTodos } onCancel={ getTodos }/>
-      
+      <TodoSearchBar
+        onSearch={ searchForTodos }
+        onCancel={ getTodos }
+        onShowArchived={ getAllArchived }
+      />
+
       {todos.map((todo, index) => (
         <Todo 
           todo={ todo }

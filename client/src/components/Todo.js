@@ -19,12 +19,12 @@ function Todo(props) {
           disabled={ todo.hide }
           onClick={ () => completeTodo(todo._id) }
         >
-          { (todo.done ? 'Reativar' : 'Completar') }
+          { (todo.done ? 'Refazer' : 'Concluir') }
         </button>
         
         <button
           className="btn btn-edit"
-          disabled={ todo.hide }
+          disabled={ todo.hide || todo.done}
           onClick={ () => setTodoToEdit({
             id: todo._id,
             description: todo.description,
@@ -36,15 +36,14 @@ function Todo(props) {
         
         <button 
           className="btn btn-archive"
-          disabled={ !todo.done }
+          disabled={ !todo.done || todo.hide }
           onClick={ () => archiveTodo(todo._id) }
         >
-          { (todo.hide ? 'Desarquivar' : 'Arquivar') }
+          Arquivar
         </button>
         
         <button
           className="btn btn-delete"
-          disabled={ todo.hide }
           onClick={ () => deleteTodo(todo._id) }
         >
           Excluir
