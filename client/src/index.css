@@ -1,0 +1,23 @@
+.todo {
+    border-style: solid;
+    border-color: grey;
+    margin: 8px;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.due-date {
+    right: 0;
+    min-width: fit-content;
+}
+
+.options {
+    display: flex;
+    gap: 8px;
+    right: 0;
+}
+
+.btn {
+    cursor: pointer;
+}

@@ -8,6 +8,14 @@ router.get('/', async (req, res) => {
     res.json(todos);
 });
 
+router.get('/:description', async (req, res) => {
+    const todos = await ToDo.find( 
+        { description: { $regex: `.*${req.params.description}.*`, $options: "i" }  
+    } );
+
+    res.json(todos);
+});
+
 router.post('/new', async (req, res) => {
     const newToDo = new ToDo(req.body);
 
@@ -20,6 +28,26 @@ router.patch('/update/:id', async (req, res) => {
     const updatedToDo = await ToDo.updateOne({_id: req.params.id}, {$set: req.body});
 
     res.json(updatedToDo);
+});
+
+router.patch('/update/done/:id', async (req, res) => {
+    const todo = await ToDo.findById(req.params.id);
+    
+    todo.done = !todo.done;
+    
+    todo.save();
+
+    res.json(todo);
+});
+
+router.patch('/update/archive/:id', async (req, res) => {
+    const todo = await ToDo.findById(req.params.id);
+    
+    todo.hide = !todo.hide;
+    
+    todo.save();
+
+    res.json(todo);
 });
 
 router.delete('/delete/:id', async (req, res) => {
