@@ -16,19 +16,19 @@ Neste repositório será desenvolvido uma aplicação simples de 'ToDo list' uti
 * **Express.js** - framework web para Node.js.
 * **Mongoose** - biblioteca JavaScript utilizada para criar conexão e trabalhar com Banco de dados MongoDB.
 
-### banco de Dados
+### banco de dados
 * **MongoDB** - Banco de dados orientado a documentos, classificado como NoSQL.
 
 ## Executar a aplicação
 A aplicação pode ser executar da seguinte maneira:
-* Manualmente no Visual Studio Code para executar o loado cliente e servidor, mas utilizando `docker-compose` para subir a imagem do MongoDB.
+* Manualmente, no Visual Studio Code para executar o lado cliente e servidor, utilizando `docker-compose` para subir a imagem do MongoDB.
 
 ### Visual Studio Code
-Para executar a aplicação manualmente, é necessário executar o front-end e back-end separadamente, além de ter o banco de dados rodando via `docker-compose`.
+Para executar a aplicação manualmente, é necessário executar o front-end e back-end separadamente, além de ter o banco de dados funcionando após executar o comando `docker-compose`.
 
 #### Etapas
-1. Executar os 'comandos servidor' e depois os 'comandos cliente':
-2. Acesse a aplicação 'cliente' em localhost:3000
+1. Executar, conforme a seguir, os 'comandos servidor' e em seguida os 'comandos cliente'.
+2. Acessar a aplicação 'cliente' em localhost:3000.
 
 ##### comandos servidor
 ```bash
@@ -38,7 +38,7 @@ cd ./server
 # instalar pacotes e dependências
 npm install
 
-# subir imagem do banco de dados MongoDB (porta )
+# subir imagem do banco de dados MongoDB
 docker-compose -f docker-compose.yml
 
 # executar a aplicação servidor
