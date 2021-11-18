@@ -1,23 +1,105 @@
-.todo {
-    border-style: solid;
-    border-color: grey;
-    margin: 8px;
-    padding: 8px;
-    display: flex;
-    justify-content: space-between;
+* {
+    margin: 0px;
+    margin: 0px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
 }
 
-.due-date {
-    right: 0;
-    min-width: fit-content;
+/*App ToDo*/
+.App {
+    border-width: 1px;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    margin: 32px auto;
+    width: 100%;
+    max-width: 700px;
+
+    padding: 32px;
+
+    text-align: center;
+}
+.app-title {
+    text-transform: uppercase;
 }
 
-.options {
-    display: flex;
-    gap: 8px;
-    right: 0;
+/*ToDo Form*/
+.todo-form {
+    margin: 20px 0px 30px 0px;
 }
 
+/*Option Buttons*/
 .btn {
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 4px;
+    opacity: 0.8;
+}
+.btn:hover {
+    opacity: 1;
+}
+
+.btn-editing-todo,
+.btn-canceling-todo,
+.btn-search-bar {
+    margin: 4px;
+}
+
+.btn-options {
+    border-radius: 20px;
+    margin: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.btn-complete-todo {
+    background-color: #33FFCC;
+}
+.btn-edit-todo {
+    background-color: #33CCFF;
+}
+.btn-delete-todo {
+    background-color: #FFCCCC;
+}
+.btn-archive-todo {
+    background-color: rgb(223, 223, 223);
+}
+
+/*ToDo Search Bar*/
+.todo-search-bar {
+    margin-bottom: 12px;
+}
+
+/*ToDo List Table*/
+.todo-table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+th {
+    color: grey;
+}
+table {
+    border-collapse: collapse;
+}
+
+/*ToDo*/
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.is-done {
+    text-decoration: line-through;
+}
+
+/*ToDo Inputs*/
+input {
+    padding: 8px 20px;
+    max-height: 32px;
+    margin: 8px 8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }

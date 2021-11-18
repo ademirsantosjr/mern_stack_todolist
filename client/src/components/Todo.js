@@ -7,24 +7,24 @@ function Todo(props) {
   const deleteTodo = props.deleteTodo;
 
   return (
-    <div className="todo">
+    <tr className="todo">
 
-      <div className="description">{ todo.description }</div>
+      <td className={ todo.done ? "is-done" : "" }>{ todo.description }</td>
 
-      <div className="due-date">{ todo.duedate.substring(0, 10) }</div>
+      <td className={ todo.done ? "is-done" : "" }>{ todo.duedate.substring(0, 10) }</td>
       
-      <div className="options">
+      <td className="todo-options">
         <button
-          className="btn btn-complete"
+          className="btn btn-options btn-complete-todo"
           disabled={ todo.hide }
           onClick={ () => completeTodo(todo._id) }
         >
-          { (todo.done ? 'Reativar' : 'Completar') }
+          { (todo.done ? 'Refazer' : 'Concluir') }
         </button>
         
         <button
-          className="btn btn-edit"
-          disabled={ todo.hide }
+          className="btn btn-options btn-edit-todo"
+          disabled={ todo.hide || todo.done}
           onClick={ () => setTodoToEdit({
             id: todo._id,
             description: todo.description,
@@ -35,22 +35,21 @@ function Todo(props) {
         </button>
         
         <button 
-          className="btn btn-archive"
-          disabled={ !todo.done }
+          className="btn btn-options btn-archive-todo"
+          disabled={ !todo.done || todo.hide }
           onClick={ () => archiveTodo(todo._id) }
         >
-          { (todo.hide ? 'Desarquivar' : 'Arquivar') }
+          Arquivar
         </button>
         
         <button
-          className="btn btn-delete"
-          disabled={ todo.hide }
+          className="btn btn-options btn-delete-todo"
           onClick={ () => deleteTodo(todo._id) }
         >
           Excluir
         </button>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }
 

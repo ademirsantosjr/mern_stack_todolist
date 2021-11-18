@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function TodoSearchBar(props) {
   const [inputSearch, setInputSearch] = useState("");
+  const [onlyArchived, setOnlyArchived] = useState(false);
 
   const handleInputSearchChange = e => {
     setInputSearch(e.target.value);
@@ -23,22 +24,38 @@ function TodoSearchBar(props) {
     setInputSearch("");
   }
 
+  const handleShowArchived = () => {
+    if (onlyArchived) {
+      props.onCancel();
+    } else {
+      props.onShowArchived();
+    }
+    setOnlyArchived(!onlyArchived)
+  }
+
   return (
-    <div>
+    <div className="todo-search-bar">
       <input
         type="text"
         placeholder="Buscar por descrição..."
+        autoComplete="off"
         value={ inputSearch }
         onChange={ handleInputSearchChange }
       />
       
       <button
-        onClick={ handleSearch }
-      >Pesquisar</button>
+        className="btn btn-search-bar"
+        onClick={ handleSearch }>Pesquisar</button>
       
       <button
-        onClick={ handleCancel }
-      >Cancelar</button>
+        className="btn btn-search-bar"
+        onClick={ handleCancel }>Cancelar</button>
+
+      <button
+        className="btn btn-search-bar"
+        onClick={ handleShowArchived }>
+        { onlyArchived ? "Mostrar Ativos" : "Mostrar Arquivados" }
+      </button>
     </div>      
   );
 }
