@@ -4,7 +4,7 @@ function App() {
   
   return (
     <div className="App">
-      <h1>Quais São os Planos?</h1>
+      <h1 className="app-title">To-Do List</h1>
 
       <TodoList />
     </div>

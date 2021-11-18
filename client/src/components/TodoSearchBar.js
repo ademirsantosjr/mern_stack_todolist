@@ -34,10 +34,11 @@ function TodoSearchBar(props) {
   }
 
   return (
-    <div>
+    <div className="todo-search-bar">
       <input
         type="text"
         placeholder="Buscar por descrição..."
+        autoComplete="off"
         value={ inputSearch }
         onChange={ handleInputSearchChange }
       />

@@ -55,6 +55,7 @@ function TodoForm(props) {
         <input 
           type="text" 
           placeholder="Descreva a Tarefa"
+          autoComplete="off"
           value={ inputDescription }
           name="text"
           onChange={ handleDescriptionChange }

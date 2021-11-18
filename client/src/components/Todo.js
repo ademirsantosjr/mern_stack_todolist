@@ -9,9 +9,9 @@ function Todo(props) {
   return (
     <tr className="todo">
 
-      <td >{ todo.description }</td>
+      <td className={ todo.done ? "is-done" : "" }>{ todo.description }</td>
 
-      <td >{ todo.duedate.substring(0, 10) }</td>
+      <td className={ todo.done ? "is-done" : "" }>{ todo.duedate.substring(0, 10) }</td>
       
       <td className="todo-options">
         <button
