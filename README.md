@@ -39,7 +39,7 @@ cd ./server
 npm install
 
 # subir imagem do banco de dados MongoDB
-docker-compose -f docker-compose.yml
+docker-compose -f docker-compose.yml up
 
 # executar a aplicação servidor
 npm start
